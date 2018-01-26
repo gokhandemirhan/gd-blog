@@ -3,12 +3,18 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/dist/config/main.js" />
+        <item url="file://$PROJECT_DIR$/dist/controllers/PostController.js" />
         <item url="file://$PROJECT_DIR$/dist/server.js" />
+        <item url="file://$PROJECT_DIR$/dist/routers/v1.js" />
+        <item url="file://$PROJECT_DIR$/dist/models/Post.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/dist/config/main.js" />
+      <root url="file://$PROJECT_DIR$/dist/controllers/PostController.js" />
       <root url="file://$PROJECT_DIR$/dist/server.js" />
+      <root url="file://$PROJECT_DIR$/dist/routers/v1.js" />
+      <root url="file://$PROJECT_DIR$/dist/models/Post.js" />
     </CLASSES>
     <SOURCES />
   </library>
