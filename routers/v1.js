@@ -11,13 +11,17 @@ export default (app) => {
      */
 
     //Append postRoutes to apiRoutes
-    apiRoutes.use('posts',postRoutes);
+    apiRoutes.use('/posts',postRoutes);
 
     postRoutes.get('/',PostController.getAllPosts);
+    postRoutes.get('/:id',PostController.getPostById);
+    postRoutes.post('/',PostController.createPost);
+    postRoutes.put('/:id',PostController.updatePostById);
+    postRoutes.delete('/:id',PostController.deletePostById);
 
     /*
      * Api Routes
      */
-    app.use('api/',apiRoutes);
+    app.use('/api',apiRoutes);
 
 }
