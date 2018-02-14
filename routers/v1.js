@@ -1,10 +1,14 @@
 import * as express from 'express';
 import PostController from '../controllers/PostController';
+import multer from 'multer'
 
 export default (app) => {
 
     const apiRoutes = express.Router();
     const postRoutes = express.Router();
+    const upload = multer({
+        dest: 'uploads'
+    });
 
     /*
      * Post Routes
@@ -15,7 +19,7 @@ export default (app) => {
 
     postRoutes.get('/',PostController.getAllPosts);
     postRoutes.get('/:id',PostController.getPostById);
-    postRoutes.post('/',PostController.createPost);
+    postRoutes.post('/',upload.single('photo'),PostController.createPost);
     postRoutes.put('/:id',PostController.updatePostById);
     postRoutes.delete('/:id',PostController.deletePostById);
 

@@ -1,4 +1,5 @@
 import Post from "../models/Post";
+import fs from 'fs';
 
 const PostController = {
   // get all posts
@@ -29,8 +30,10 @@ const PostController = {
     if (!title || !content) {
       res.status(422).json({ error: "All fields are required" });
     }
-
     const post = new Post({ title, content });
+    post.photo.data = fs.readFileSync(req.file.path);
+    post.photo.contentType = 'image/png';
+
     post.save((err, post) => {
       if (err) {
         res.status(500).json({ err });
