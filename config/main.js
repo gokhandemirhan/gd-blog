@@ -6,7 +6,8 @@ const config = {
     //test environment
     test_env:'test',
     test_db: 'gd-blog-test',
-    test_port:3001
+    test_port:3001,
+    secret:'thisisatestsecret'
 };
 
 export default config;

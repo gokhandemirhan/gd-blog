@@ -5,7 +5,8 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import helmet from "helmet";
 import cors from "cors";
-var path = require('path');
+import path from "path";
+import passport from "passport";
 
 import router from "./routers/v1";
 import config from "./config/main";
@@ -23,8 +24,8 @@ app.use(cookieParser());
 app.use(logger("dev"));
 app.use(helmet());
 app.use(cors());
-
 app.use('/uploads',express.static(path.join(__dirname, '/uploads')));
+app.use(passport.initialize());
 
 //routers
 router(app);

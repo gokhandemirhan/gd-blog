@@ -14,20 +14,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "fs": "0.0.1-security",
-    "helmet": "^3.10.0",
-    "mongoose": "^5.0.1",
+    "helmet": "^3.11.0",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.6",
     "morgan": "^1.9.0",
-    "multer": "^1.3.0"
+    "multer": "^1.3.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.15.0"
   }
 }
