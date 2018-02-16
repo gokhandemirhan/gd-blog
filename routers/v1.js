@@ -1,31 +1,37 @@
-import * as express from 'express';
-import PostController from '../controllers/PostController';
-import multer from 'multer'
+import * as express from "express";
+import PostController from "../controllers/PostController";
+import multer from "multer";
 
-export default (app) => {
+export default app => {
+  const apiRoutes = express.Router();
+  const postRoutes = express.Router();
 
-    const apiRoutes = express.Router();
-    const postRoutes = express.Router();
-    const upload = multer({
-        dest: 'uploads'
-    });
+  var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, "uploads");
+    },
+    filename: function(req, file, cb) {
+      cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname);
+    }
+  });
 
-    /*
+  var upload = multer({ storage: storage });
+
+  /*
      * Post Routes
      */
 
-    //Append postRoutes to apiRoutes
-    apiRoutes.use('/posts',postRoutes);
+  //Append postRoutes to apiRoutes
+  apiRoutes.use("/posts", postRoutes);
 
-    postRoutes.get('/',PostController.getAllPosts);
-    postRoutes.get('/:id',PostController.getPostById);
-    postRoutes.post('/',upload.single('photo'),PostController.createPost);
-    postRoutes.put('/:id',PostController.updatePostById);
-    postRoutes.delete('/:id',PostController.deletePostById);
+  postRoutes.get("/", PostController.getAllPosts);
+  postRoutes.get("/:id", PostController.getPostById);
+  postRoutes.post("/", upload.single("photo"), PostController.createPost);
+  postRoutes.put("/:id", upload.single("photo"), PostController.updatePostById);
+  postRoutes.delete("/:id", PostController.deletePostById);
 
-    /*
+  /*
      * Api Routes
      */
-    app.use('/api',apiRoutes);
-
-}
+  app.use("/api", apiRoutes);
+};

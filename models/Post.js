@@ -16,9 +16,9 @@ const PostSchema = new Schema({
         default:'',
         required:true
     },
-    photo:{
-        data: Buffer,
-        contentType: String
+    photoUrl:{
+        type: String,
+        default:''
     }
 });
 

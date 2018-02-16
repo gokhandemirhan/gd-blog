@@ -1,5 +1,5 @@
 import Post from "../models/Post";
-import fs from 'fs';
+import config from "../config/main";
 
 const PostController = {
   // get all posts
@@ -26,13 +26,16 @@ const PostController = {
   createPost(req, res, next) {
     const title = req.body.title;
     const content = req.body.content;
+    const photo = req.file;
 
     if (!title || !content) {
       res.status(422).json({ error: "All fields are required" });
     }
     const post = new Post({ title, content });
-    post.photo.data = fs.readFileSync(req.file.path);
-    post.photo.contentType = 'image/png';
+    if(photo) {
+      const filePath = req.protocol + "://" + req.hostname + ':'+ config.port + '/' + photo.path;
+      post.photoUrl = filePath;
+    }
 
     post.save((err, post) => {
       if (err) {
@@ -44,6 +47,12 @@ const PostController = {
   //update post by id
   updatePostById(req, res, next) {
     const id = req.params.id;
+    const photo = req.file;
+    if(photo) {
+        const filePath = req.protocol + "://" + req.hostname + ':'+ config.port + '/' + photo.path;
+        req.body.photoUrl = filePath;
+    }
+
     Post.findByIdAndUpdate(id, req.body, (err, post) => {
       if (err) {
         res.status(500).json({ err });
